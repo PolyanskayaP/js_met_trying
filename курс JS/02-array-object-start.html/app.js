@@ -88,7 +88,7 @@ function render() {
     for (let i = 0; i < notes.length; i++) {
         listElement.insertAdjacentHTML('beforeend', getNoteTemplate(notes[i], i))
     }   
-}
+} 
 
 render()
 
