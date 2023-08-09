@@ -84,13 +84,10 @@ const notes = [
 ]
 
 function render() {
-    // for (let i = 0; i < notes.length; i++) {
-    //     listElement.insertAdjacentHTML('beforeend', getNoteTemplate(notes[i]))
-    // }   
-
-    for (let note of notes) {
-        listElement.insertAdjacentHTML('beforeend', getNoteTemplate(note))
-    }
+    listElement.innerHTML = ''
+    for (let i = 0; i < notes.length; i++) {
+        listElement.insertAdjacentHTML('beforeend', getNoteTemplate(notes[i], i))
+    }   
 }
 
 render()
@@ -104,18 +101,21 @@ createBtn.onclick = function () {
         title: inputElement.value, 
         completed: false,
     }
-    listElement.insertAdjacentHTML('beforeend', getNoteTemplate(newNote)) 
+    //listElement.insertAdjacentHTML('beforeend', getNoteTemplate(newNote)) 
+    notes.push(newNote) 
+    render()
     inputElement.value = ''
 }
 
-function getNoteTemplate(note) {
+function getNoteTemplate(note, index) {
     return `
     <li
     class="list-group-item d-flex justify-content-between align-items-center"
     >
     <span class = "${note.completed ? 'text-decoration-line-through' : ''}">${note.title}</span>
     <span>
-        <span class="btn btn-small btn-${note.completed ? 'warning' : 'success'}">&check;</span>
+        <span class="btn btn-small btn-${note.completed ? 'warning' : 'success'
+        }" data-index="${index}">&check;</span>
         <span class="btn btn-small btn-danger">&times;</span>
     </span>
     </li>
